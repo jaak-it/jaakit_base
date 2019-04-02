@@ -36,6 +36,8 @@ RUN yum -y install wget && \
 
 RUN easy_install-3.6 pip
 
+RUN pip3 install --upgrade pip
+
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]
 
