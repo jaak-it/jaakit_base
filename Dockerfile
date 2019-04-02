@@ -31,8 +31,7 @@ RUN yum -y install wget && \
      yum -y install cairo-devel libjpeg-turbo && \
      yum -y install unzip bzip2 && \
      yum -y install scl-utils && \
-     yum -y install java-1.8.0-openjdk && \
-     yum -y install nodejs; yum clean all
+     yum -y install java-1.8.0-openjdk; yum clean all
 
 RUN easy_install-3.6 pip
 
