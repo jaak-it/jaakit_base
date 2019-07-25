@@ -6,6 +6,7 @@ node {
     def dockerLoginUser = 'admin'
     def dockerLoginPassword = '1Mono2019'
     def dockerFile = 'Dockerfile'
+    def jenkinsURL = 'doomtreader.yellowbrain.io:8083'
 
     try {
         notifyBuild('STARTED')
@@ -14,7 +15,7 @@ node {
         }
 
         stage('Docker Login') {
-          sh ("docker login -u ${dockerLoginUser} -p ${dockerLoginPassword} doomtreader.jaak-it.com:8083")
+          sh ("docker login -u ${dockerLoginUser} -p ${dockerLoginPassword} ${jenkinsURL}")
         }
 
         stage('Build image') {
@@ -22,15 +23,15 @@ node {
         }
 
         stage('Docker Login') {
-          sh ("docker login -u ${dockerLoginUser} -p ${dockerLoginPassword} doomtreader.jaak-it.com:8083")
+          sh ("docker login -u ${dockerLoginUser} -p ${dockerLoginPassword} ${jenkinsURL}")
         }
 
         stage('Tag Image'){
-          sh "docker tag ${dockerName}:${dockerMayorVersion}.${dockerMinorVersion}.${env.BUILD_NUMBER} doomtreader.jaak-it.com:8083/${dockerName}:${dockerMayorVersion}.${dockerMinorVersion}.${env.BUILD_NUMBER}"
+          sh "docker tag ${dockerName}:${dockerMayorVersion}.${dockerMinorVersion}.${env.BUILD_NUMBER} ${jenkinsURL}/${dockerName}:${dockerMayorVersion}.${dockerMinorVersion}.${env.BUILD_NUMBER}"
         }
 
         stage('Push into Nexus'){
-          sh  "docker push doomtreader.jaak-it.com:8083/${dockerName}:${dockerMayorVersion}.${dockerMinorVersion}.${env.BUILD_NUMBER}"
+          sh  "docker push ${jenkinsURL}/${dockerName}:${dockerMayorVersion}.${dockerMinorVersion}.${env.BUILD_NUMBER}"
         }
 
         stage('Remove Unused docker image') {
