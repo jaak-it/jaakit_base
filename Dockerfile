@@ -24,6 +24,7 @@ RUN yum -y install epel-release https://centos7.iuscommunity.org/ius-release.rpm
 RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
 
 RUN yum -y install wget && \
+     yum -y install nodejs && \
      yum -y install centos-release-scl && \
      yum -y install python36u python36u-libs python36u-devel python36u-pip && \
      yum -y install cronie && \
